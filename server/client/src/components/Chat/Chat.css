@@ -32,3 +32,36 @@
     width: 60%;
   }
 }
+
+.qstOuter {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  background-color: lightgoldenrodyellow;
+
+}
+
+.qstnBox {
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+}
+
+
+.qstn {
+  border: 1px solid purple;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 15px;
+  border-radius: 25px;
+  background-color: lightgreen;
+  font-size: large;
+}
+
+.sbmtAns {
+  background-color: red;
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 15px;
+  border-radius: 25px
+}

@@ -3,7 +3,8 @@ const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
 
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+const { addUser, removeUser, getUser, getUsersInRoom, updateUsers } = require('./users');
+const { addQuestion, getAllQuestions } = require('./gameData');
 
 const router = require('./router');
 
@@ -26,9 +27,22 @@ io.on('connect', (socket) => {
     socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
 
     io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+    io.to(user.room).emit('alert', "Are we seeing this?");
 
     callback();
   });
+
+  socket.on('submitted', (id) => {
+    const user = updateUsers(id);
+    io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+  });
+
+  socket.on('questions', ({question, room}) => {
+    addQuestion({question, room});
+    console.log(getAllQuestions(room));
+    io.to(room).emit('getQuestions', getAllQuestions(room));
+  })
+
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);

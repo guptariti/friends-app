@@ -5,4 +5,9 @@ router.get("/", (req, res) => {
   res.send({ response: "Server is up and running." }).status(200);
 });
 
+router.get("/gamePoints", (req, res) => {
+  
+});
+
+router.post("")
 module.exports = router;
